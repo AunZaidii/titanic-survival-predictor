@@ -1,0 +1,162 @@
+{
+  "test_size": 223,
+  "shared_test": {
+    "Accuracy": {
+      "Decision tree": 0.874439461883408,
+      "Random forest": 0.8699551569506726,
+      "RF - DT": -0.004484304932735439
+    },
+    "Precision": {
+      "Decision tree": 0.8536585365853658,
+      "Random forest": 0.8904109589041096,
+      "RF - DT": 0.03675242231874376
+    },
+    "Recall": {
+      "Decision tree": 0.813953488372093,
+      "Random forest": 0.7558139534883721,
+      "RF - DT": -0.05813953488372092
+    },
+    "F1": {
+      "Decision tree": 0.8333333333333334,
+      "Random forest": 0.8176100628930818,
+      "RF - DT": -0.01572327044025157
+    },
+    "ROC AUC": {
+      "Decision tree": 0.9162705822441011,
+      "Random forest": 0.9436428450178238,
+      "RF - DT": 0.027372262773722733
+    },
+    "Log loss (lower is better)": {
+      "Decision tree": 0.4826065793953664,
+      "Random forest": 0.3358990602418424,
+      "RF - DT": -0.14670751915352398
+    },
+    "Train accuracy": {
+      "Decision tree": 0.8173652694610778,
+      "Random forest": 0.8607784431137725,
+      "RF - DT": 0.0434131736526947
+    },
+    "Train - test gap": {
+      "Decision tree": -0.05707419242233025,
+      "Random forest": -0.009176713836900108,
+      "RF - DT": 0.04789747858543014
+    }
+  },
+  "mcnemar": {
+    "only_dt": 7,
+    "only_rf": 6,
+    "p_value": 1.0
+  },
+  "cost": {
+    "Decision tree": {
+      "Train acc": 0.8173652694610778,
+      "Test acc": 0.874439461883408,
+      "Trees": 1.0,
+      "Total nodes": 15.0,
+      "Fit (ms)": 4.655299941077828,
+      "Predict (ms)": 1.3661999255418777
+    },
+    "Random forest": {
+      "Train acc": 0.8607784431137725,
+      "Test acc": 0.8699551569506726,
+      "Trees": 200.0,
+      "Total nodes": 16378.0,
+      "Fit (ms)": 544.4941997993737,
+      "Predict (ms)": 46.83650005608797
+    },
+    "Decision tree, no limit": {
+      "Train acc": 0.9790419161676647,
+      "Test acc": 0.7982062780269058,
+      "Trees": 1.0,
+      "Total nodes": 341.0,
+      "Fit (ms)": 7.601400138810277,
+      "Predict (ms)": 2.522900002077222
+    },
+    "Random forest, no limit": {
+      "Train acc": 0.9790419161676647,
+      "Test acc": 0.8789237668161435,
+      "Trees": 200.0,
+      "Total nodes": 57442.0,
+      "Fit (ms)": 461.3527001347393,
+      "Predict (ms)": 23.485800018534064
+    }
+  },
+  "nested_cv": {
+    "Accuracy": {
+      "DT mean": 0.8170698637875841,
+      "DT std": 0.025226676355936197,
+      "RF mean": 0.8271784570962275,
+      "RF std": 0.02901466777296206,
+      "RF - DT": 0.010108593308643509,
+      "RF wins (of 25)": 16,
+      "DT wins (of 25)": 9
+    },
+    "Precision": {
+      "DT mean": 0.8068141574414623,
+      "DT std": 0.04488562062872681,
+      "RF mean": 0.817867075901671,
+      "RF std": 0.0448284372982698,
+      "RF - DT": 0.011052918460208491,
+      "RF wins (of 25)": 15,
+      "DT wins (of 25)": 10
+    },
+    "Recall": {
+      "DT mean": 0.6913213981244672,
+      "DT std": 0.054676960287588,
+      "RF mean": 0.7093691389599317,
+      "RF std": 0.06382662470661132,
+      "RF - DT": 0.01804774083546465,
+      "RF wins (of 25)": 15,
+      "DT wins (of 25)": 7
+    },
+    "F1": {
+      "DT mean": 0.7430833945047085,
+      "DT std": 0.037507995153652766,
+      "RF mean": 0.7580895436746979,
+      "RF std": 0.04497513155243451,
+      "RF - DT": 0.015006149169989444,
+      "RF wins (of 25)": 18,
+      "DT wins (of 25)": 7
+    },
+    "ROC AUC": {
+      "DT mean": 0.8476961420678072,
+      "DT std": 0.02975289345666404,
+      "RF mean": 0.8680839115716634,
+      "RF std": 0.03217062918374559,
+      "RF - DT": 0.02038776950385627,
+      "RF wins (of 25)": 22,
+      "DT wins (of 25)": 3
+    }
+  },
+  "accuracy_gaps": {
+    "rf_better": 16,
+    "dt_better": 9,
+    "tied": 0
+  },
+  "importance": {
+    "parch": {
+      "Decision tree": 0.0,
+      "Random forest": 0.033488417089851924
+    },
+    "sibsp": {
+      "Decision tree": 0.07285254043804651,
+      "Random forest": 0.048344929326155174
+    },
+    "pclass": {
+      "Decision tree": 0.22704032521919848,
+      "Random forest": 0.1353869566589011
+    },
+    "age": {
+      "Decision tree": 0.08570030107347691,
+      "Random forest": 0.16785098130591206
+    },
+    "fare": {
+      "Decision tree": 0.06936202450490861,
+      "Random forest": 0.21789112438955108
+    },
+    "gender": {
+      "Decision tree": 0.5450448087643694,
+      "Random forest": 0.3970375912296287
+    }
+  }
+}

@@ -1,0 +1,55 @@
+=== STEP 1: Data ===
+Train: 668 | Test: 223 
+
+=== STEP 2: Tuned settings (5-fold CV on training set) ===
+Decision tree: {'max_depth': 3, 'min_samples_leaf': 5} | CV accuracy 0.813
+Random forest: {'max_depth': 10, 'min_samples_leaf': 5} | CV accuracy 0.820
+
+=== STEP 3 (A): Shared test set, 223 passengers. Precision, recall and F1 are for 'survived' ===
+                            Decision tree  Random forest  RF - DT
+Accuracy                            0.874          0.870   -0.004
+Precision                           0.854          0.890    0.037
+Recall                              0.814          0.756   -0.058
+F1                                  0.833          0.818   -0.016
+ROC AUC                             0.916          0.944    0.027
+Log loss (lower is better)          0.483          0.336   -0.147
+Train accuracy                      0.817          0.861    0.043
+Train - test gap                   -0.057         -0.009    0.048 
+
+Decision tree confusion matrix (rows = true, columns = predicted):
+[[125  12]
+ [ 16  70]]
+Random forest confusion matrix (rows = true, columns = predicted):
+[[129   8]
+ [ 21  65]]
+
+Passengers where exactly one model was right:
+  only the tree: 7 | only the forest: 6 | exact McNemar p-value: 1.000
+
+=== STEP 4: Overfitting and cost (times are from one run on one CPU core) ===
+                         Train acc  Test acc  Trees  Total nodes  Fit (ms)  Predict (ms)
+Decision tree                0.817     0.874    1.0         15.0       4.7           1.4
+Random forest                0.861     0.870  200.0      16378.0     544.5          46.8
+Decision tree, no limit      0.979     0.798    1.0        341.0       7.6           2.5
+Random forest, no limit      0.979     0.879  200.0      57442.0     461.4          23.5 
+
+=== STEP 5 (B): Repeated nested CV, 25 test sets (this is the slow step) ===
+           DT mean  DT std  RF mean  RF std  RF - DT  RF wins (of 25)  DT wins (of 25)
+Accuracy     0.817   0.025    0.827   0.029    0.010               16                9
+Precision    0.807   0.045    0.818   0.045    0.011               15               10
+Recall       0.691   0.055    0.709   0.064    0.018               15                7
+F1           0.743   0.038    0.758   0.045    0.015               18                7
+ROC AUC      0.848   0.030    0.868   0.032    0.020               22                3
+The 25 folds reuse the same passengers, so they are not independent and the win counts are descriptive only.
+
+=== Feature importance ===
+        Decision tree  Random forest
+gender          0.545          0.397
+fare            0.069          0.218
+age             0.086          0.168
+pclass          0.227          0.135
+sibsp           0.073          0.048
+parch           0.000          0.033 
+
+Saved 6 comparison charts
+Saved results.json

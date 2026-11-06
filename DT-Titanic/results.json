@@ -1,0 +1,70 @@
+{
+  "passengers": 891,
+  "survived": 342,
+  "train_size": 668,
+  "test_size": 223,
+  "unlimited": {
+    "depth": 26,
+    "leaves": 171,
+    "train_acc": 0.9790419161676647,
+    "test_acc": 0.7982062780269058
+  },
+  "best_params": {
+    "max_depth": 3,
+    "min_samples_leaf": 5
+  },
+  "best_cv_acc": 0.8129053978229155,
+  "final": {
+    "depth": 3,
+    "leaves": 8,
+    "train_acc": 0.8173652694610778,
+    "test_acc": 0.874439461883408
+  },
+  "baseline_acc": 0.6143497757847534,
+  "confusion": [
+    [
+      125,
+      12
+    ],
+    [
+      16,
+      70
+    ]
+  ],
+  "report": {
+    "died": {
+      "precision": 0.8865248226950354,
+      "recall": 0.9124087591240876,
+      "f1-score": 0.8992805755395683,
+      "support": 137.0
+    },
+    "survived": {
+      "precision": 0.8536585365853658,
+      "recall": 0.813953488372093,
+      "f1-score": 0.8333333333333334,
+      "support": 86.0
+    },
+    "accuracy": 0.874439461883408,
+    "macro avg": {
+      "precision": 0.8700916796402006,
+      "recall": 0.8631811237480903,
+      "f1-score": 0.8663069544364508,
+      "support": 223.0
+    },
+    "weighted avg": {
+      "precision": 0.8738499320877189,
+      "recall": 0.874439461883408,
+      "f1-score": 0.8738480067963567,
+      "support": 223.0
+    }
+  },
+  "importance": {
+    "gender": 0.5450448087643694,
+    "pclass": 0.22704032521919848,
+    "age": 0.08570030107347691,
+    "sibsp": 0.07285254043804651,
+    "fare": 0.06936202450490861,
+    "parch": 0.0
+  },
+  "rules": "|--- gender <= 0.50\n|   |--- age <= 13.00\n|   |   |--- sibsp <= 2.00\n|   |   |   |--- class: 1\n|   |   |--- sibsp >  2.00\n|   |   |   |--- class: 0\n|   |--- age >  13.00\n|   |   |--- pclass <= 1.50\n|   |   |   |--- class: 0\n|   |   |--- pclass >  1.50\n|   |   |   |--- class: 0\n|--- gender >  0.50\n|   |--- pclass <= 2.50\n|   |   |--- fare <= 28.86\n|   |   |   |--- class: 1\n|   |   |--- fare >  28.86\n|   |   |   |--- class: 1\n|   |--- pclass >  2.50\n|   |   |--- fare <= 23.35\n|   |   |   |--- class: 1\n|   |   |--- fare >  23.35\n|   |   |   |--- class: 0\n"
+}

@@ -1,0 +1,82 @@
+=== STEP 1: Dataset ===
+Passengers: 891
+Survived: 342 | Did not survive: 549
+Missing values (columns that have any):
+ age            177
+embarked         2
+deck           688
+embark_town      2
+dtype: int64 
+
+=== STEP 2: Prepared features ===
+['pclass', 'gender', 'age', 'sibsp', 'parch', 'fare'] 
+
+=== STEP 3: Split ===
+Train: 668 | Test: 223 
+
+=== STEP 4: Tree with no depth limit ===
+Depth: 26 | Leaves: 171
+Train accuracy: 0.979
+Test accuracy:  0.798
+
+=== STEP 5: Hyperparameter search (5-fold CV on training set) ===
+Best settings: {'max_depth': 3, 'min_samples_leaf': 5}
+Best CV accuracy: 0.813
+
+=== STEP 6: Final tree ===
+Depth: 3 | Leaves: 8
+Train accuracy: 0.817
+Test accuracy:  0.874
+
+Confusion matrix (rows = true, columns = predicted):
+[[125  12]
+ [ 16  70]]
+
+               precision    recall  f1-score   support
+
+        died       0.89      0.91      0.90       137
+    survived       0.85      0.81      0.83        86
+
+    accuracy                           0.87       223
+   macro avg       0.87      0.86      0.87       223
+weighted avg       0.87      0.87      0.87       223
+
+(Baseline: always predicting 'died' would score 0.614)
+
+=== STEP 7: Top of the tree as text rules ===
+|--- gender <= 0.50
+|   |--- age <= 13.00
+|   |   |--- sibsp <= 2.00
+|   |   |   |--- class: 1
+|   |   |--- sibsp >  2.00
+|   |   |   |--- class: 0
+|   |--- age >  13.00
+|   |   |--- pclass <= 1.50
+|   |   |   |--- class: 0
+|   |   |--- pclass >  1.50
+|   |   |   |--- class: 0
+|--- gender >  0.50
+|   |--- pclass <= 2.50
+|   |   |--- fare <= 28.86
+|   |   |   |--- class: 1
+|   |   |--- fare >  28.86
+|   |   |   |--- class: 1
+|   |--- pclass >  2.50
+|   |   |--- fare <= 23.35
+|   |   |   |--- class: 1
+|   |   |--- fare >  23.35
+|   |   |   |--- class: 0
+
+=== Feature importance ===
+gender    0.545
+pclass    0.227
+age       0.086
+sibsp     0.073
+fare      0.069
+parch     0.000
+dtype: float64 
+
+=== STEP 8: Predicting two made-up passengers ===
+1st-class woman, 29: survived (probability of survival 0.97)
+3rd-class man, 25: died (probability of survival 0.13)
+Saved the model and results.json

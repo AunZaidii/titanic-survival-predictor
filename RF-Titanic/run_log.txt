@@ -1,0 +1,71 @@
+=== STEP 1: Dataset ===
+Passengers: 891
+Survived: 342 | Did not survive: 549
+Missing values (columns that have any):
+ age            177
+embarked         2
+deck           688
+embark_town      2
+dtype: int64 
+
+=== STEP 2: Prepared features ===
+['pclass', 'gender', 'age', 'sibsp', 'parch', 'fare'] 
+
+=== STEP 3: Split ===
+Train: 668 | Test: 223 
+
+=== STEP 4: Forest with no depth limit ===
+Trees: 200 | Average tree depth: 17.6
+Train accuracy: 0.979
+Out-of-bag accuracy: 0.772
+Test accuracy:  0.879
+
+=== STEP 5: Hyperparameter search (5-fold CV on training set) ===
+Best settings: {'max_depth': 10, 'min_samples_leaf': 5}
+Best CV accuracy: 0.820
+
+=== STEP 6: Final forest ===
+Trees: 200 | Depth limit: 10 | Total leaves: 8289
+Train accuracy: 0.861
+Test accuracy:  0.870
+
+Confusion matrix (rows = true, columns = predicted):
+[[129   8]
+ [ 21  65]]
+
+               precision    recall  f1-score   support
+
+        died       0.86      0.94      0.90       137
+    survived       0.89      0.76      0.82        86
+
+    accuracy                           0.87       223
+   macro avg       0.88      0.85      0.86       223
+weighted avg       0.87      0.87      0.87       223
+
+(Baseline: always predicting 'died' would score 0.614)
+
+=== STEP 7: Number of trees vs CV accuracy ===
+   1 trees: 0.752
+   2 trees: 0.795
+   5 trees: 0.805
+  10 trees: 0.811
+  25 trees: 0.816
+  50 trees: 0.816
+ 100 trees: 0.820
+ 200 trees: 0.820
+ 300 trees: 0.816
+ 500 trees: 0.817
+
+=== STEP 8: Feature importance (averaged over all trees) ===
+gender    0.397
+fare      0.218
+age       0.168
+pclass    0.135
+sibsp     0.048
+parch     0.033
+dtype: float64 
+
+=== STEP 9: Predicting two made-up passengers (same two as the decision tree) ===
+1st-class woman, 29: survived (probability of survival 0.98; 199 of 200 trees say survived)
+3rd-class man, 25: died (probability of survival 0.12; 1 of 200 trees say survived)
+Saved the model and results.json
