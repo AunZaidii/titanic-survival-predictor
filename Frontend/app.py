@@ -395,6 +395,7 @@ def main():
         <div><b>{pct(cmp_r["nested_cv"]["Accuracy"]["RF mean"])}</b><span>random forest accuracy*</span></div>
       </div>
       <div class="waves"></div>
+      <div class="ship-track" aria-hidden="true"><div class="ship"></div></div>
     </div>
     <p class="fine">*Mean across 25 test sets from repeated nested cross-validation.</p>""")
 
