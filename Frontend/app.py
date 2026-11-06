@@ -376,6 +376,36 @@ passengers by risk: ROC AUC {rf_auc} against {dt_auc}, better on {auc_wins} of 2
 probabilities, and the tree when you need to explain every decision.</p></div>"""
 
 
+SHIP_SCRIPT = """<script>
+// Keeps the ship on the moving wave. Each half of the wave path is a parabola:
+// in its 2400 x 64 viewBox, y = 34 -/+ 90 u (1 - u), with u running 0..1 across each 600-unit half.
+(() => {
+  if (window.__titanicShip) return;
+  window.__titanicShip = true;
+  const step = () => {
+    const hero = document.querySelector(".hero");
+    const waves = hero && hero.querySelector(".waves");
+    const track = hero && hero.querySelector(".ship-track");
+    if (waves && track) {
+      const t = getComputedStyle(waves).transform;
+      const shift = t && t !== "none" ? new DOMMatrix(t).m41 : 0;
+      const sx = waves.offsetWidth / 2400;                       // viewBox units to pixels (vertical scale is 1)
+      let x = (track.offsetLeft + track.offsetWidth / 2 - shift) / sx;
+      x = ((x % 1200) + 1200) % 1200;
+      const side = x < 600 ? -1 : 1, u = (x % 600) / 600;
+      const y = 34 + side * 90 * u * (1 - u);
+      const slope = side * 90 * (1 - 2 * u) / 600 / sx;
+      const angle = Math.max(-12, Math.min(12, Math.atan(slope) * 180 / Math.PI));
+      const lift = (waves.offsetHeight - 1 - y) - 0.13 * track.offsetHeight;   // keep the red waterline in the water
+      track.style.transform = `translateY(${-lift}px) rotate(${angle}deg)`;
+    }
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+})();
+</script>"""
+
+
 # ---------------- Page ----------------
 def main():
     st.set_page_config(page_title="Titanic Survival Predictor", page_icon="🚢", layout="wide")
@@ -398,6 +428,7 @@ def main():
       <div class="ship-track" aria-hidden="true"><div class="ship"></div></div>
     </div>
     <p class="fine">*Mean across 25 test sets from repeated nested cross-validation.</p>""")
+    st.html(SHIP_SCRIPT, unsafe_allow_javascript=True)
 
     t1, t2, t3 = st.tabs([":material/account_tree: Decision Tree", ":material/forest: Random Forest", ":material/balance: Comparison"])
     with t1:
